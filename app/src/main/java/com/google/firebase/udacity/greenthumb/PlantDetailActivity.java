@@ -127,6 +127,7 @@ public class PlantDetailActivity extends AppCompatActivity
         mItemDescription.setText(mPlant.description);
         mItemPrice.setText(getString(R.string.plant_credits, mPlant.price));
 
+        // Called in onLoadFinished in PlantDetailActivity, once the Plant object is queried and initialized
         Analytics.logEventViewItem(this, mPlant);
     }
 

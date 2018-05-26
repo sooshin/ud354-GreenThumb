@@ -83,6 +83,7 @@ public class ShoppingCartActivity extends AppCompatActivity
 
         getSupportLoaderManager().initLoader(SHOPPING_CART_LOADER, null, this);
 
+        // Called in onCreate in ShoppingCartActivity
         Analytics.logEventBeginCheckout(this);
     }
 
@@ -105,7 +106,8 @@ public class ShoppingCartActivity extends AppCompatActivity
                         Snackbar.make(v, R.string.checkout_complete, Snackbar.LENGTH_SHORT).show();
                     }
                 }, DELAY);
-
+                
+                // Called in the checkout button click listener in ShoppingCartActivity
                 Analytics.logEventEcommercePurchase(this);
                 break;
         }
