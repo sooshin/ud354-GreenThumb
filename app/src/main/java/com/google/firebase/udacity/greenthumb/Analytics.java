@@ -20,9 +20,10 @@ public class Analytics {
                 FirebaseAnalytics.Event.ADD_TO_CART, params);
     }
 
-    public static void longEventViewItem(Context context, int itemId) {
+    public static void logEventViewItem(Context context, Plant plant) {
         Bundle params = new Bundle();
-        params.putInt(FirebaseAnalytics.Param.ITEM_ID, itemId);
+        params.putInt(FirebaseAnalytics.Param.ITEM_ID, plant.id);
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, plant.name);
 
         FirebaseAnalytics.getInstance(context).logEvent(
                 FirebaseAnalytics.Event.VIEW_ITEM, params);
@@ -33,9 +34,9 @@ public class Analytics {
                 FirebaseAnalytics.Event.BEGIN_CHECKOUT, null);
     }
 
-    public static void logEventCheckoutProgress(Context context) {
+    public static void logEventEcommercePurchase(Context context) {
         FirebaseAnalytics.getInstance(context).logEvent(
-                FirebaseAnalytics.Event.CHECKOUT_PROGRESS, null);
+                FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, null);
     }
 
     public static void logEventRemoveFromCart(Context context, int itemId) {

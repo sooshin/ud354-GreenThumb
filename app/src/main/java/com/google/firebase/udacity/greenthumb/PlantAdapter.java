@@ -48,8 +48,6 @@ public class PlantAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     PlantDetailActivity.startActivity(v.getContext(), itemId);
-
-                    Analytics.longEventViewItem(v.getContext(), itemId);
                 }
             });
         }

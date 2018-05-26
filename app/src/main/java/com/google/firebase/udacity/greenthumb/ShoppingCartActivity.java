@@ -82,6 +82,8 @@ public class ShoppingCartActivity extends AppCompatActivity
         mButtonCheckout.setOnClickListener(this);
 
         getSupportLoaderManager().initLoader(SHOPPING_CART_LOADER, null, this);
+
+        Analytics.logEventBeginCheckout(this);
     }
 
     public static void startActivity(Context context) {
@@ -104,7 +106,7 @@ public class ShoppingCartActivity extends AppCompatActivity
                     }
                 }, DELAY);
 
-                Analytics.logEventCheckoutProgress(ShoppingCartActivity.this);
+                Analytics.logEventEcommercePurchase(this);
                 break;
         }
     }
