@@ -46,5 +46,16 @@ public class Analytics {
         FirebaseAnalytics.getInstance(context).logEvent(
                 FirebaseAnalytics.Event.REMOVE_FROM_CART, params);
     }
+
+    public static void setUserPropertyGardeningExperience(Context context, int experienceIndex) {
+        String userPropertyKey = context.getString(
+                R.string.user_property_key_gardening_experience);
+
+        String[] userPropertyValues = context.getResources().getStringArray(
+                R.array.user_property_values_gardening_experience);
+
+        FirebaseAnalytics.getInstance(context).setUserProperty(
+                userPropertyKey, userPropertyValues[experienceIndex]);
+    }
 }
 

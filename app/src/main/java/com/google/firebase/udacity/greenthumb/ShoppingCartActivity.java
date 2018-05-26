@@ -106,7 +106,7 @@ public class ShoppingCartActivity extends AppCompatActivity
                         Snackbar.make(v, R.string.checkout_complete, Snackbar.LENGTH_SHORT).show();
                     }
                 }, DELAY);
-                
+
                 // Called in the checkout button click listener in ShoppingCartActivity
                 Analytics.logEventEcommercePurchase(this);
                 break;
