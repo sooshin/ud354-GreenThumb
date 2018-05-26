@@ -19,5 +19,31 @@ public class Analytics {
         FirebaseAnalytics.getInstance(context).logEvent(
                 FirebaseAnalytics.Event.ADD_TO_CART, params);
     }
+
+    public static void longEventViewItem(Context context, int itemId) {
+        Bundle params = new Bundle();
+        params.putInt(FirebaseAnalytics.Param.ITEM_ID, itemId);
+
+        FirebaseAnalytics.getInstance(context).logEvent(
+                FirebaseAnalytics.Event.VIEW_ITEM, params);
+    }
+
+    public static void logEventBeginCheckout(Context context) {
+        FirebaseAnalytics.getInstance(context).logEvent(
+                FirebaseAnalytics.Event.BEGIN_CHECKOUT, null);
+    }
+
+    public static void logEventCheckoutProgress(Context context) {
+        FirebaseAnalytics.getInstance(context).logEvent(
+                FirebaseAnalytics.Event.CHECKOUT_PROGRESS, null);
+    }
+
+    public static void logEventRemoveFromCart(Context context, int itemId) {
+        Bundle params = new Bundle();
+        params.putInt(FirebaseAnalytics.Param.ITEM_ID, itemId);
+
+        FirebaseAnalytics.getInstance(context).logEvent(
+                FirebaseAnalytics.Event.REMOVE_FROM_CART, params);
+    }
 }
 

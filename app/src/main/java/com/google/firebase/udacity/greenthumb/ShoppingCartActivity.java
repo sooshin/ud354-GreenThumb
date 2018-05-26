@@ -103,6 +103,8 @@ public class ShoppingCartActivity extends AppCompatActivity
                         Snackbar.make(v, R.string.checkout_complete, Snackbar.LENGTH_SHORT).show();
                     }
                 }, DELAY);
+
+                Analytics.logEventCheckoutProgress(ShoppingCartActivity.this);
                 break;
         }
     }

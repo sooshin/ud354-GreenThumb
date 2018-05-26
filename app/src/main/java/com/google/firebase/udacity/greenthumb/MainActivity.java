@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         switch (id) {
             case R.id.menu_shopping_cart:
                 ShoppingCartActivity.startActivity(this);
+
+                Analytics.logEventBeginCheckout(this);
                 break;
             case R.id.menu_purchases:
                 PurchaseActivity.startActivity(this);

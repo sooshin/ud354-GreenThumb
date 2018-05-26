@@ -92,6 +92,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter {
                                 }
                             })
                             .show();
+
+                    Analytics.logEventRemoveFromCart(v.getContext(), itemId);
                 }
             });
         }
