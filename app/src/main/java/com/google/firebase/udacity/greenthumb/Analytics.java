@@ -8,7 +8,7 @@ import com.google.firebase.udacity.greenthumb.data.Plant;
 
 public class Analytics {
 
-    public static void logEventAddToCart(Context context, Plant plant, int quantity) {
+    public static void logEventAddToCart(Context context, Plant plant, long quantity) {
         Bundle params = new Bundle();
         params.putInt(FirebaseAnalytics.Param.ITEM_ID, plant.id);
         params.putString(FirebaseAnalytics.Param.ITEM_NAME, plant.name);
