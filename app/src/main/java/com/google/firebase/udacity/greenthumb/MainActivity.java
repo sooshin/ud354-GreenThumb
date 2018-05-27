@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Force a crash to test your implementation
 //        forceCrash();
+
+        // Call the line below to report a non-fatal crash
         reportNonFatalError();
     }
 
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void forceCrash() {
-        //after pressing the button to crash it to make sure Crashlytics has a chance to report the crash.
+        // After pressing the button to crash it, the Crashlytics has a chance to report the crash.
         Button crashButton = new Button(this);
         crashButton.setText("Crash!");
         crashButton.setOnClickListener(new View.OnClickListener() {
