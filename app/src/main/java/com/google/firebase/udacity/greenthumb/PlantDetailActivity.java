@@ -18,7 +18,9 @@ package com.google.firebase.udacity.greenthumb;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,9 +30,14 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.udacity.greenthumb.data.DbContract.PlantEntry;
 import com.google.firebase.udacity.greenthumb.data.Plant;
 import com.google.firebase.udacity.greenthumb.data.PlantCartHelper;
@@ -41,6 +48,8 @@ import com.google.firebase.udacity.greenthumb.data.PlantCartHelper;
  */
 public class PlantDetailActivity extends AppCompatActivity
         implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final String TAG = PlantDetailActivity.class.getSimpleName();
 
     private static final String INTENT_EXTRA_ITEM = "item_id";
     private static final int PLANT_DETAIL_LOADER = 2;
@@ -81,6 +90,33 @@ public class PlantDetailActivity extends AppCompatActivity
         mItemId = getIntent().getIntExtra(INTENT_EXTRA_ITEM, 0);
 
         getSupportLoaderManager().initLoader(PLANT_DETAIL_LOADER, null, this);
+
+        // Call the getDynamicLink() method to receive the deep link
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri uri = null;
+                        if (pendingDynamicLinkData != null) {
+                            // An example of a dynamic link in Green Thumb is
+                            // http://greenthumb.example.com/1
+                            // Display the correct plant description based on the link
+                            uri = pendingDynamicLinkData.getLink();
+                            String plantId = uri.getLastPathSegment(); // extract plantId from the link
+                            mItemId = Integer.parseInt(plantId);
+                            getSupportLoaderManager().restartLoader(
+                                    PLANT_DETAIL_LOADER, null, PlantDetailActivity.this);
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "getDynamicLink:onFailure", e);
+                    }
+                });
     }
 
 
